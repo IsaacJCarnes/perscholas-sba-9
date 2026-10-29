@@ -1,7 +1,57 @@
-.exampleSection {
-  border: 2px solid var(--border);
-  background-color: whitesmoke;
-  border-radius: 20px;
-  padding: 10px;
-  color: black;
+#TaskForm {
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0px;
+  padding: 20px;
+}
+
+.formFields {
+  position: relative;
+  width: 100%;
+  display: flex;
+  gap: 20px;
+}
+
+.formField {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#FilterForm {
+  margin-right: 50px;
+  align-self: flex-end;
+  right: 0px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 50px;
+}
+
+#FilterForm label,
+#TaskForm label {
+  grid-row-start: 0;
+  grid-row-end: 1;
+  font-size: medium;
+  color: rgb(69, 69, 119);
+  font-weight: 400;
+}
+
+.styledInput {
+  border: none;
+  padding: 5px;
+  background-color: rgb(69, 69, 119);
+  font-size: small;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#TaskForm textarea {
+  resize: unset;
+  height: 50px;
 }
