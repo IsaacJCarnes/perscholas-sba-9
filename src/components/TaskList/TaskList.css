@@ -1,0 +1,92 @@
+#TaskList{
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0px;
+}
+
+.taskItem{
+    position: relative;
+    list-style: none;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 20px;
+    background-color: black;
+    border-radius: 10px;
+    gap: 10px;
+}
+
+.taskItem *{
+    margin: 0px;
+    padding: 0px;
+}
+
+.taskItem h3{
+    color: whitesmoke;
+}
+
+.description{
+    font-size: large;
+}
+
+.taskStats{
+    display: flex;
+    gap: 15px;
+}
+
+.priority.high{
+    color: red;
+}
+
+.priority.medium{
+    color: orange;
+}
+
+.priority.low{
+    color: green;
+}
+
+
+.taskToolbar{
+    display: flex;
+    justify-content: space-around;
+    width: 200px;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+}
+
+.taskToolbar button{
+    background: unset;
+    border: none;
+    color: red;
+    font-size: medium;
+    cursor: pointer;
+}
+
+.taskToolbar select{
+    font-size: medium;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: unset;
+    cursor: pointer;
+}
+
+.taskToolbar select.pending{
+    background-color: rgb(255, 255, 164);
+    color: rgb(116, 116, 74);
+}
+
+.taskToolbar select.in-progress{
+    background-color: whitesmoke;
+    color: rgb(56, 56, 231);
+}
+
+.taskToolbar select.completed{
+    background-color: rgb(219, 255, 219);
+    color: rgb(49, 71, 49);
+}
