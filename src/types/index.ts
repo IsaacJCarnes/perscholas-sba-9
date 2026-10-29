@@ -28,3 +28,8 @@ export interface TaskFilterProps {
     priority?: TaskPriority;
   }) => void;
 }
+
+export interface TaskFormProps {
+  nextID: number;
+  onAddTask: (task: Task) => void;
+}

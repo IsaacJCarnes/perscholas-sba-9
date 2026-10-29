@@ -2,10 +2,12 @@ import { useState } from "react";
 
 import type { Task } from "../../types";
 
+import TaskForm from "../TaskForm/TaskForm.tsx";
 import TaskFilter from "../TaskFilter/TaskFilter.tsx";
 import TaskList from "../TaskList/TaskList";
 
 export default function Dashboard() {
+  const [nextID, setNextID] = useState(0);
   const [tasks, setTasks] = useState<Array<Task>>([]);
   const [filter, setFilter] = useState<{ priority?: string; status?: string }>(
     {},
@@ -23,9 +25,14 @@ export default function Dashboard() {
     setTasks(tasks.filter((task) => task.id !== id));
   }
 
+  const onAddTask = (task: Task) => {
+    setNextID((prevID) => prevID + 1);
+    setTasks([...tasks, task]);
+  }
 
   return (
     <>
+      <TaskForm onAddTask={onAddTask} nextID={nextID} />
       <TaskFilter onFilterChange={setFilter} />
       <TaskList
         tasks={tasks.filter(
