@@ -1,0 +1,7 @@
+.exampleSection {
+  border: 2px solid var(--border);
+  background-color: whitesmoke;
+  border-radius: 20px;
+  padding: 10px;
+  color: black;
+}
