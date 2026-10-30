@@ -1,32 +1,23 @@
-# React + TypeScript + Vite
+# Task Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A small task-management app built with React and TypeScript. It lets you add and edit tasks, update their status, remove them, and narrow the list by status, priority, or a text search. Task data is saved in the browser's local storage.
 
-Currently, two official plugins are available:
+### Components
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- `components/`
+  - `Dashboard/Dashboard.tsx` coordinates task state, local storage, editing, and filtering, and connects the form, filters, and list.
+  - `TaskForm/TaskForm.tsx` provides the form for adding or editing a task, including its title, description, status, priority, and due date.
+  - `TaskFilter/TaskFilter.tsx` provides status and priority selectors plus a text search.
+  - `TaskList/TaskList.tsx` renders the task collection, while `TaskItem.tsx` displays an individual task and its edit, delete, and status controls.
+- `hooks/useLocalStorage.tsx` custom hook that tracks state while adding/retrieving data from local storage.
+- `types/index.ts` defines the TypeScript prop types.
+- `utils/taskUtils.ts` contains the task filtering logic used by the dashboard.
 
-## React Compiler
+## Run locally
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+From this directory, install dependencies and start the Vite development server:
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```sh
+npm install
+npm run dev
 ```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
