@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Task, TaskFormProps } from "../../types";
 
 const resetTask: Task = {
@@ -7,12 +7,20 @@ const resetTask: Task = {
   description: "",
   status: "pending",
   priority: "low",
-  dueDate: "",
+  dueDate: new Date().toISOString().split("T")[0],
 };
 
-export default function TaskForm({ nextID, onAddTask }: TaskFormProps) {
+export default function TaskForm({
+  onSubmitTask,
+  initialState = resetTask,
+  isEditing = false,
+}: TaskFormProps) {
   const [isValid, setIsValid] = useState(true);
-  const [task, setTask] = useState<Task>({ ...resetTask });
+  const [task, setTask] = useState<Task>({ ...initialState });
+
+  useEffect(() => {
+    setTask({ ...initialState });
+  }, [initialState]);
 
   const handleChange = (
     event: React.ChangeEvent<
@@ -30,7 +38,7 @@ export default function TaskForm({ nextID, onAddTask }: TaskFormProps) {
   const submitTask = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!isValid) return;
-    onAddTask(task);
+    onSubmitTask(task);
     setTask({ ...resetTask });
   };
   return (
@@ -42,6 +50,7 @@ export default function TaskForm({ nextID, onAddTask }: TaskFormProps) {
           value={task.title}
           className="styledInput"
           onChange={handleChange}
+          required
         />
       </div>
       <div className="formField">
@@ -92,7 +101,7 @@ export default function TaskForm({ nextID, onAddTask }: TaskFormProps) {
         </div>
       </div>
       <button type="submit" className="styledInput">
-        Add Task
+        {isEditing ? "Edit Task" : "Add Task"}
       </button>
     </form>
   );

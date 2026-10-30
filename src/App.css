@@ -27,19 +27,18 @@
 #FilterForm {
   width: 100%;
   max-width: 500px;
-  margin-right: 10px;
-  align-self: flex-end;
-  right: 0px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 50px;
 }
 
 #FilterForm label,
-#TaskForm label {
+#TaskForm label,
+.styledLabel {
   grid-row-start: 0;
   grid-row-end: 1;
   font-size: medium;
+  font-size: large;
   color: rgb(69, 69, 119);
   font-weight: 400;
 }
@@ -56,4 +55,19 @@
 #TaskForm textarea {
   resize: unset;
   height: 50px;
+}
+
+#TaskToolbar {
+  max-width: 100%;
+  width: fit-content;
+  margin: 0px 10px;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+#TaskToolbar #StatSection {
+  align-self: center;
+  margin-right: 50px;
+ 
 }

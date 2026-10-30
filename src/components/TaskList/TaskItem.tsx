@@ -12,18 +12,33 @@ export default function TaskItem(props: TaskItemProps) {
         <p className="dueDate">Due: {props.task.dueDate}</p>
       </div>
       <div className="taskToolbar">
-        <select
-          defaultValue={props.task.status}
-          onChange={(e) =>
-            props.onStatusChange(props.task.id, e.target.value as TaskStatus)
-          }
-          className={props.task.status}
-        >
-          <option value={"pending"}>Pending</option>
-          <option value={"in-progress"}>In Progress</option>
-          <option value={"completed"}>Completed</option>
-        </select>
-        <button onClick={() => props.onDelete(props.task.id)}>Delete</button>
+        <div>
+          <button
+            className="editButton"
+            onClick={() => props.onEdit(props.index)}
+          >
+            Edit
+          </button>
+          <button
+            className="deleteButton"
+            onClick={() => props.onDelete(props.task.id)}
+          >
+            Delete
+          </button>
+        </div>
+        <div>
+          <select
+            defaultValue={props.task.status}
+            onChange={(e) =>
+              props.onStatusChange(props.task.id, e.target.value as TaskStatus)
+            }
+            className={props.task.status}
+          >
+            <option value={"pending"}>Pending</option>
+            <option value={"in-progress"}>In Progress</option>
+            <option value={"completed"}>Completed</option>
+          </select>
+        </div>
       </div>
     </li>
   );

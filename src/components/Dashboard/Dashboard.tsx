@@ -12,6 +12,8 @@ export default function Dashboard() {
   const { storageData, setStorageItem } = useLocalStorage();
   const tasks: Array<Task> = storageData.tasks ? storageData.tasks : [];
 
+  const [editingID, setEditingID] = useState(-1);
+
   const [nextID, setNextID] = useState(0);
   const [filter, setFilter] = useState<FilterProps>({});
 
@@ -22,9 +24,13 @@ export default function Dashboard() {
     setStorageItem("tasks", newTasks);
   };
 
-  const onDelete = (id: string) => {
+  const onDeleteSelect = (id: string) => {
     const newTasks = tasks.filter((task) => task.id !== id);
     setStorageItem("tasks", newTasks);
+  };
+
+  const onEditSelect = (taskIndex: number) => {
+    setEditingID(taskIndex);
   };
 
   const onAddTask = (task: Task) => {
@@ -36,14 +42,34 @@ export default function Dashboard() {
     setStorageItem("tasks", newTasks);
   };
 
+  const onEditTask = (task: Task) => {
+    const newTasks = tasks.map((t) => {
+      return t.id === task.id ? { ...task } : { ...t };
+    });
+    setEditingID(-1);
+    setStorageItem("tasks", newTasks);
+  };
+
   return (
     <>
-      <TaskForm onAddTask={onAddTask} nextID={nextID} />
-      <TaskFilter onFilterChange={setFilter} />
+      <TaskForm
+        onSubmitTask={editingID > -1 ? onEditTask : onAddTask}
+        initialState={editingID > -1 ? tasks[editingID] : undefined}
+        isEditing={editingID > -1}
+      />
+      <div id="TaskToolbar">
+        <div id="StatSection">
+          <label className="styledLabel">
+            {tasks.length} {tasks.length == 1 ? "Task" : "Tasks"}
+          </label>
+        </div>
+        <TaskFilter onFilterChange={setFilter} />
+      </div>
       <TaskList
         tasks={filterTasks(tasks, filter)}
         onStatusChange={onStatusChange}
-        onDelete={onDelete}
+        onDelete={onDeleteSelect}
+        onEdit={onEditSelect}
       />
     </>
   );

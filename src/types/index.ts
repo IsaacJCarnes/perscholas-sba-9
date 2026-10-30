@@ -14,22 +14,29 @@ export interface TaskListProps {
   tasks: Task[];
   onStatusChange: (taskId: string, newStatus: TaskStatus) => void;
   onDelete: (taskId: string) => void;
+  onEdit: (taskIndex: number) => void;
 }
 
 export interface TaskItemProps {
+  index: number;
   task: Task;
   onStatusChange: (taskId: string, newStatus: TaskStatus) => void;
   onDelete: (taskId: string) => void;
+  onEdit: (taskIndex: number) => void;
 }
 
-export interface FilterProps { priority?: string; status?: string; search?: string }
+export interface FilterProps {
+  priority?: string;
+  status?: string;
+  search?: string;
+}
 
 export interface TaskFilterProps {
   onFilterChange: (filters: FilterProps) => void;
 }
 
 export interface TaskFormProps {
-  nextID: number;
-  onAddTask: (task: Task) => void;
+  onSubmitTask: (task: Task) => void;
+  initialState?: Task;
+  isEditing?: boolean;
 }
-
