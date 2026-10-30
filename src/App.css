@@ -25,11 +25,13 @@
 }
 
 #FilterForm {
-  margin-right: 50px;
+  width: 100%;
+  max-width: 500px;
+  margin-right: 10px;
   align-self: flex-end;
   right: 0px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   column-gap: 50px;
 }
 

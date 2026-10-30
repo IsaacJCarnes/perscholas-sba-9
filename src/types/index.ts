@@ -22,14 +22,14 @@ export interface TaskItemProps {
   onDelete: (taskId: string) => void;
 }
 
+export interface FilterProps { priority?: string; status?: string; search?: string }
+
 export interface TaskFilterProps {
-  onFilterChange: (filters: {
-    status?: TaskStatus;
-    priority?: TaskPriority;
-  }) => void;
+  onFilterChange: (filters: FilterProps) => void;
 }
 
 export interface TaskFormProps {
   nextID: number;
   onAddTask: (task: Task) => void;
 }
+

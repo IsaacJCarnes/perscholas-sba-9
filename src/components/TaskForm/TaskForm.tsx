@@ -12,9 +12,13 @@ const resetTask: Task = {
 
 export default function TaskForm({ nextID, onAddTask }: TaskFormProps) {
   const [isValid, setIsValid] = useState(true);
-  const [task, setTask] = useState<Task>({ ...resetTask, id: String(nextID) });
+  const [task, setTask] = useState<Task>({ ...resetTask });
 
-  const handleChange = (event: React.ChangeEvent<HTMLFormElement>) => {
+  const handleChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => {
     event.preventDefault();
     const { name, value } = event.target;
     setTask((prevTask) => ({
@@ -27,22 +31,37 @@ export default function TaskForm({ nextID, onAddTask }: TaskFormProps) {
     event.preventDefault();
     if (!isValid) return;
     onAddTask(task);
-    setTask({ ...resetTask, id: String(nextID) });
+    setTask({ ...resetTask });
   };
   return (
-    <form onChange={handleChange} onSubmit={submitTask} id="TaskForm">
+    <form onSubmit={submitTask} id="TaskForm">
       <div className="formField">
         <label htmlFor="title">Title</label>
-        <input name="title" value={task.title} className="styledInput"/>
+        <input
+          name="title"
+          value={task.title}
+          className="styledInput"
+          onChange={handleChange}
+        />
       </div>
       <div className="formField">
         <label htmlFor="description">Description</label>
-        <textarea name="description" value={task.description} className="styledInput"/>
+        <textarea
+          name="description"
+          value={task.description}
+          className="styledInput"
+          onChange={handleChange}
+        />
       </div>
       <div className="formFields">
         <div className="formField">
           <label htmlFor="status">Status</label>
-          <select name="status" value={task.status} className="styledInput">
+          <select
+            name="status"
+            value={task.status}
+            className="styledInput"
+            onChange={handleChange}
+          >
             <option value="pending">Pending</option>
             <option value="in-progress">In Progress</option>
             <option value="completed">Completed</option>
@@ -50,7 +69,12 @@ export default function TaskForm({ nextID, onAddTask }: TaskFormProps) {
         </div>
         <div className="formField">
           <label htmlFor="priority">Priority</label>
-          <select name="priority" value={task.priority} className="styledInput">
+          <select
+            name="priority"
+            value={task.priority}
+            className="styledInput"
+            onChange={handleChange}
+          >
             <option value="high">High</option>
             <option value="medium">Medium</option>
             <option value="low">Low</option>
@@ -58,10 +82,18 @@ export default function TaskForm({ nextID, onAddTask }: TaskFormProps) {
         </div>
         <div className="formField">
           <label htmlFor="dueDate">Due Date</label>
-          <input className="styledInput" type="date" name="dueDate" value={task.dueDate} />
+          <input
+            className="styledInput"
+            type="date"
+            name="dueDate"
+            value={task.dueDate}
+            onChange={handleChange}
+          />
         </div>
       </div>
-      <button type="submit" className="styledInput">Add Task</button>
+      <button type="submit" className="styledInput">
+        Add Task
+      </button>
     </form>
   );
 }
